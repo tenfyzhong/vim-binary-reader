@@ -25,6 +25,7 @@ endfunction "}}}
 
 function! s:BinaryBufWritePre() "{{{
     if &bin && &ft == 'xxd'
+        let b:save_pos = getpos('.')
         silent %!xxd -r
     endif
 endfunction "}}}
@@ -33,6 +34,10 @@ function! s:BinaryBufWritePost() "{{{
     if &bin && &ft == 'xxd'
         silent %!xxd
         set nomod
+        if exists('b:save_pos')
+            call setpos('.', b:save_pos)
+            unlet b:save_pos
+        endif
     endif
 endfunction "}}}
 
