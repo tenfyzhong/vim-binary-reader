@@ -6,11 +6,11 @@ When the file has an extension, I will use `g:vim_binary_reader_extensions`
 variable to check it's a binary file or not. 
 
 ## setting
-`g:vim_binary_reader_disable` disable this plugin.
-The default value is 0. 
+`g:vim_binary_reader_disable` disable this plugin.  
+The default value is 0.   
 
-`g:vim_binary_reader_extensions` the binary file extensions. It's a regex pattern. 
-The default value:
+`g:vim_binary_reader_extensions` the binary file extensions. It's a regex pattern.  
+The default value:  
 ```viml
 let g:vim_binary_reader_extensions = "^\(bin\|dat\|mp3\|mp4\|o\|a\|so\|exe\|class\)$"
 ```
