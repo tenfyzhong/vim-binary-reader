@@ -7,31 +7,32 @@
 " created: 2016-05-02 12:55:03
 "==============================================================
 
-if !has('perl') || !executable('xxd')
+if !has('perl') || !executable('xxd') " {{{
     finish
-endif
+endif " }}}
 
+" {{{
 if exists("g:vim_binary_reader_disable") && 
             \g:vim_binary_reader_disable == 1
     finish
-endif
+endif " }}}
 
 function! s:BinaryBufReadPost() "{{{
     if &bin && &buftype == ''
         silent %!xxd
-        set ft=xxd
+        set ft=binary
     endif
 endfunction "}}}
 
 function! s:BinaryBufWritePre() "{{{
-    if &bin && &ft == 'xxd'
+    if &bin && &ft == 'binary'
         let b:save_pos = getpos('.')
         silent %!xxd -r
     endif
 endfunction "}}}
 
 function! s:BinaryBufWritePost() "{{{
-    if &bin && &ft == 'xxd'
+    if &bin && &ft == 'binary'
         silent %!xxd
         set nomod
         if exists('b:save_pos')
@@ -63,15 +64,15 @@ perl << EOF
 EOF
 endfunction "}}}
 
-if !exists("g:vim_binary_reader_extensions")
+if !exists("g:vim_binary_reader_extensions") " {{{
     let g:vim_binary_reader_extensions = "^\(bin\|dat\|mp3\|mp4\|o\|a\|so\|exe\|class\)$"
-endif
+endif " }}}
 
-" vim -b : edit binary using xxd-format!
-augroup vim-binary-reader-init
+augroup vim-binary-reader-init " {{{
+    " vim -b : edit binary using xxd-format!
     au!
     au BufReadPre * call <SID>SetIfBinary(expand('%'))
     au BufreadPost * call <SID>BinaryBufReadPost()
     au BufWritePre * call <SID>BinaryBufWritePre()
     au BufWritePost * call <SID>BinaryBufWritePost()
-augroup END
+augroup END " }}}
