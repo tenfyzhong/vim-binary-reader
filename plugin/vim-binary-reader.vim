@@ -7,11 +7,13 @@
 " created: 2016-05-02 12:55:03
 "==============================================================
 
-if !has('perl') || !executable('xxd') " {{{
+if !executable('xxd') " {{{
     finish
 endif " }}}
 
 " {{{
+let s:has_perl = has('perl')
+
 if exists("g:vim_binary_reader_disable") && 
             \g:vim_binary_reader_disable == 1
     finish
@@ -54,6 +56,11 @@ function! s:SetIfBinary(filename) "{{{
             setlocal binary
         endif
         return 
+    endif
+
+    " if without perl, return
+    if !s:has_perl
+        return
     endif
 
 perl << EOF
