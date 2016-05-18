@@ -72,7 +72,7 @@ EOF
 endfunction "}}}
 
 if !exists("g:vim_binary_reader_extensions") " {{{
-    let g:vim_binary_reader_extensions = "^\(bin\|dat\|mp3\|mp4\|o\|a\|so\|exe\|class\)$"
+    let g:vim_binary_reader_extensions = "^\(bin\|dat\|mp3\|mp4\|o\|a\|so\|exe\|class\|out\)$"
 endif " }}}
 
 augroup vim-binary-reader-init " {{{
