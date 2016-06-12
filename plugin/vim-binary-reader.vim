@@ -52,7 +52,7 @@ function! s:SetIfBinary(filename) "{{{
     let l:extension = fnamemodify(a:filename, ':e')
     if l:extension != ''
         if exists("g:vim_binary_reader_extensions") && 
-                    \g:vim_binary_reader_extensions =~? l:extension
+                    \l:extension =~? g:vim_binary_reader_extensions 
             setlocal binary
         endif
         return 
